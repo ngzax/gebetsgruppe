@@ -1,12 +1,12 @@
-{application, gebetsgruppe,
- [
-  {description, ""},
-  {vsn, "1"},
-  {registered, []},
+{application, gebetsgruppe, [
+  {mod, { gebetsgruppe_app, []}},
+  {description, "The Prayer Group"},
+  {vsn, "0.0.1"},
   {applications, [
                   kernel,
-                  stdlib
+                  stdlib,
+                  cowboy
                  ]},
-  {mod, { gebetsgruppe_app, []}},
-  {env, []}
- ]}.
+  {env, [{http_port, 4000}]},
+  {registered, []}
+]}.

@@ -3,6 +3,7 @@ defmodule Gebetsgruppe.PageControllerTest do
 
   test "GET /" do
     conn = get conn(), "/"
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+    # For a while, at least, this isn't really a web app and has nothing at the root.
+    assert html_response(conn, 404) # =~ "Welcome to Phoenix!"
   end
 end

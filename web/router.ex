@@ -14,9 +14,11 @@ defmodule Gebetsgruppe.Router do
   end
 
   scope "/", Gebetsgruppe do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :api
+    # pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    # get "/",        PageController,   :index
+    get "/prayers", PrayerController, :index
   end
 
   # Other scopes may use custom stacks.

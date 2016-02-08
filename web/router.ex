@@ -18,8 +18,12 @@ defmodule Gebetsgruppe.Router do
       get "/prayers",     PrayerController, :index
       get "/prayers/:id", PrayerController, :show
 
-      get "/",        PageController,   :index
+      get "/",            PageController,   :index
+  end
+    
+  scope "/api/v0", Gebetsgruppe do
     pipe_through :api
+      get "/prayers", PrayerController, :index
   end
 
   # Other scopes may use custom stacks.

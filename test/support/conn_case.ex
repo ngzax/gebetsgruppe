@@ -22,7 +22,7 @@ defmodule Gebetsgruppe.ConnCase do
 
       alias Gebetsgruppe.Repo
       import Ecto.Model
-      import Ecto.Query, only: [from: 2]
+      import Ecto.Query, only: [from: 1, from: 2]
 
       import Gebetsgruppe.Router.Helpers
 
@@ -36,6 +36,6 @@ defmodule Gebetsgruppe.ConnCase do
       Ecto.Adapters.SQL.restart_test_transaction(Gebetsgruppe.Repo, [])
     end
 
-    :ok
+    {:ok, conn: Phoenix.ConnTest.conn()}
   end
 end

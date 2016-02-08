@@ -1,0 +1,3 @@
+<h2>A Prayer</h2>
+
+<b><%= @prayer.body %></b>

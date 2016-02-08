@@ -1,0 +1,11 @@
+<h2>Prayers</h2>
+
+<table class="table">
+  <%= for prayer <- @prayers do %>
+    <tr>
+      <td><b><%= prayer.id %></b></td>
+      <td><%= prayer.body %></td>
+      <td><%= link "View", to: prayer_path(@conn, :show, prayer.id) %></td>
+    </tr>
+  <% end %>
+</table>

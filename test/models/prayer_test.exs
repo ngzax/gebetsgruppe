@@ -3,7 +3,7 @@ defmodule Gebetsgruppe.PrayerTest do
 
   alias Gebetsgruppe.Prayer
 
-  @valid_attrs %{body: "some content"}
+  @valid_attrs   %{body: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

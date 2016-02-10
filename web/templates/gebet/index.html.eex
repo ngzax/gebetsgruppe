@@ -5,7 +5,7 @@
     <tr>
       <td><b><%= prayer.id %></b></td>
       <td><%= prayer.body %></td>
-      <td><%= link "View", to: prayer_path(@conn, :show, prayer.id) %></td>
+      <td><%= link "View", to: gebet_path(@conn, :show, prayer.id) %></td>
     </tr>
   <% end %>
 </table>

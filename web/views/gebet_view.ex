@@ -1,6 +1,6 @@
-defmodule Gebetsgruppe.PrayerView do
+defmodule Gebetsgruppe.GebetView do
   use Gebetsgruppe.Web, :view
-  alias Gebetsgruppe.Prayer
+  alias Gebetsgruppe.Gebet
 
   def render("index.json", %{prayers: prayers}) do
     prayers

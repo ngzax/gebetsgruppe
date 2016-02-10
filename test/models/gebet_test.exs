@@ -1,18 +1,19 @@
-defmodule Gebetsgruppe.PrayerTest do
+defmodule Gebetsgruppe.GebetTest do
   use Gebetsgruppe.ModelCase
 
-  alias Gebetsgruppe.Prayer
+  alias Gebetsgruppe.Gebet
 
   @valid_attrs   %{body: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Prayer.changeset(%Prayer{}, @valid_attrs)
+    changeset = Gebet.changeset(%Gebet{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Prayer.changeset(%Prayer{}, @invalid_attrs)
+    changeset = Gebet.changeset(%Gebet{}, @invalid_attrs)
     refute changeset.valid?
   end
+
 end

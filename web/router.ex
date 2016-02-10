@@ -16,9 +16,9 @@ defmodule Gebetsgruppe.Router do
   # Public Routes
   scope alias: Gebetsgruppe do
     pipe_through :browser
-      get "/prayers",     PrayerController, :index
-      get "/prayers/:id", PrayerController, :show
-      get "/",            PageController,   :index
+      get "/gebets",     GebetController, :index
+      get "/gebets/:id", GebetController, :show
+      get "/",           PageController,  :index
   end
 
   # Future private routes
@@ -29,13 +29,13 @@ defmodule Gebetsgruppe.Router do
   # Public API
   scope "/api/v0", alias: Gebetsgruppe do
     pipe_through :api
-      resources "/prayers", PrayerController, only: [:index]
+      resources "/gebets", GebetController, only: [:index]
   end
 
   # Private API
   # scope "/api/v0", alias: Gebetsgruppe do
   #   pipe_through [:api, :auth]
-  #     get "/prayers", PrayerController, :index
+  #     get "/gebets", GebetController, :index
   # end
   
 end

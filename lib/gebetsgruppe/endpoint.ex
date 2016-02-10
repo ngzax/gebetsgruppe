@@ -34,6 +34,7 @@ defmodule Gebetsgruppe.Endpoint do
     store: :cookie,
     key: "_gebetsgruppe_key",
     signing_salt: "8E4Id2Zl"
-
+    
   plug Gebetsgruppe.Router
+  
 end

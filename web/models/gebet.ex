@@ -1,7 +1,7 @@
-defmodule Gebetsgruppe.Prayer do
+defmodule Gebetsgruppe.Gebet do
   use Gebetsgruppe.Web, :model
 
-  schema "prayers" do
+  schema "gebet" do
     field :body, :string
     timestamps
   end
@@ -20,9 +20,9 @@ defmodule Gebetsgruppe.Prayer do
     |> cast(params, @required_fields, @optional_fields)
   end
   
-  defimpl Poison.Encoder, for: Gebetsgruppe.Prayer do
-    def encode(prayer, _options) do
-      prayer
+  defimpl Poison.Encoder, for: Gebetsgruppe.Gebet do
+    def encode(gebet, _options) do
+      gebet
       |> Map.from_struct
       |> Map.drop([:__meta__, :__struct__])
       |> Poison.encode!

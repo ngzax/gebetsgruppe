@@ -1,8 +1,8 @@
 defmodule PrayerListIntegrationTest do
-  use Gebetsgruppe.IntegrationCase
+  # use Gebetsgruppe.IntegrationCase
   # use ExUnit.Case, async: true
   # use Plug.Test
-  
+  #
   # alias Gebetsgruppe.Prayer
   # alias Gebetsgruppe.Repo
   # # alias Gebetsgruppe.Router
@@ -38,5 +38,5 @@ defmodule PrayerListIntegrationTest do
   #   find_element(:tag, "tbody")
   #     |> find_all_within_element(:tag, "tr")
   # end
-
+  #
 end

@@ -17,3 +17,8 @@ config :gebetsgruppe, Gebetsgruppe.Repo,
   database: "gebetsgruppe_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# This is for Acceptance Testing
+# You need to start phantomjs with "$ phantomjs --wd" before running these tests.
+config :hound, driver: "phantomjs"
+  

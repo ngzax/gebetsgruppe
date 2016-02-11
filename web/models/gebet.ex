@@ -1,7 +1,7 @@
 defmodule Gebetsgruppe.Gebet do
   use Gebetsgruppe.Web, :model
 
-  schema "gebet" do
+  schema "gebets" do
     field :body, :string
     timestamps
   end

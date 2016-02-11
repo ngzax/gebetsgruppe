@@ -14,6 +14,15 @@ config :gebetsgruppe, Gebetsgruppe.Endpoint,
   pubsub: [name: Gebetsgruppe.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"],      # optional
+  verify_module: Guardian.JWT,   # optional
+  issuer:        "Gebetsgruppe",
+  ttl:           {30, :days},
+  verify_issuer: false,          # optional
+  secret_key:    "LetUsPray",
+  serializer:    Gebetsgruppe.GuardianSerializer
+ 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

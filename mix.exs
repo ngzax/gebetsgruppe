@@ -37,10 +37,12 @@ defmodule Gebetsgruppe.Mixfile do
       {:phoenix_html,        "~> 2.1"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       
+      {:comeonin,            "~> 2.1.0"},
       {:cowboy,              "~> 1.0"},
-      {:ex_spec,             "~> 1.0.0",   only: :test},
-      {:hound,               "~> 0.8",     only: :test},
-      {:mix_test_watch,      "~> 0.2",     only: :dev}
+      {:ex_spec,             "~> 1.0.0",  only: :test},
+      {:guardian,            "~> 0.10.0"},
+      {:hound,               "~> 0.8",    only: :test},
+      {:mix_test_watch,      "~> 0.2",    only: :dev}
     ]
   end
 

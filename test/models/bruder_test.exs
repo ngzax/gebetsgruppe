@@ -3,16 +3,17 @@ defmodule Gebetsgruppe.BruderTest do
 
   alias Gebetsgruppe.Bruder
 
-  @valid_attrs %{email: "some content", encrypted_password: "some content", name: "some content", password: "some content"}
+  # That password is "pray" bcrypted via https://www.bcrypt-generator.com/
+  @valid_attrs %{email: "bruder@kirche.com", encrypted_password: "$2a$08$2fPajyRgQEyA6PA7KU/1CurOz26ITt7CY6qox3vR10FRK8iA8oaDe", name: "Big Bruder", password: "pray"}
   @invalid_attrs %{}
 
-  test "changeset with valid attributes" do
-    changeset = Bruder.changeset(%Bruder{}, @valid_attrs)
+  test "Can create a Valid User" do
+    changeset = Bruder.create_changeset(%Bruder{}, @valid_attrs)
     assert changeset.valid?
   end
 
-  test "changeset with invalid attributes" do
-    changeset = Bruder.changeset(%Bruder{}, @invalid_attrs)
+  test "Won't create an Invalid User" do
+    changeset = Bruder.create_changeset(%Bruder{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

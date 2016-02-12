@@ -13,10 +13,11 @@ defmodule Gebetsgruppe.Bruder do
   @required_fields ~w(name email encrypted_password password)
   @optional_fields ~w()
 
-  # The following code was cargo-culted wholesale from https://github.com/hassox/phoenix_guardian/blob/master/web/models/user.ex
-  before_insert :maybe_update_password
-  before_update :maybe_update_password
-
+  # ----
+  # The following code was (mostly) cargo-culted wholesale from https://github.com/hassox/phoenix_guardian/blob/master/web/models/user.ex
+  # I did need to update a few things for more recent Ecto, however.
+  # ----
+    
   def from_email(nil), do: { :error, :not_found }
   def from_email(email) do
     Repo.one(User, email: email)
@@ -31,6 +32,7 @@ defmodule Gebetsgruppe.Bruder do
   def update_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(), ~w(name email password))
+    |> maybe_update_password
   end
 
   def login_changeset(model), do: model |> cast(%{}, ~w(), ~w(email password))

@@ -18,7 +18,7 @@ config :guardian, Guardian,
   allowed_algos: ["HS512"],      # optional
   verify_module: Guardian.JWT,   # optional
   issuer:        "Gebetsgruppe",
-  ttl:           {30, :days},
+  ttl:           {10, :days},
   verify_issuer: false,          # optional
   secret_key:    "LetUsPray",
   serializer:    Gebetsgruppe.GuardianSerializer

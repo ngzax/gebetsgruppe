@@ -17,11 +17,28 @@ defmodule Gebetsgruppe.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Gebetsgruppe, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+    [
+      mod: {Gebetsgruppe, []},
+      applications: applications(Mix.env)
+    ]
   end
 
+  def applications(env) when env in [:test] do
+    applications(:default) ++ [:ex_machina]
+  end
+  
+  def applications(_) do
+    [
+      :phoenix,
+      :phoenix_ecto,
+      :phoenix_html,
+      :comeonin,
+      :cowboy,
+      :logger,
+      :postgrex
+    ]
+  end
+    
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
   defp elixirc_paths(_),     do: ["lib", "web"]
@@ -35,14 +52,15 @@ defmodule Gebetsgruppe.Mixfile do
       {:phoenix_ecto,        "~> 1.1"},
       {:postgrex,            "~> 0.11.0"},
       {:phoenix_html,        "~> 2.1"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.0",   only: :dev},
       
       {:comeonin,            "~> 2.1.0"},
       {:cowboy,              "~> 1.0"},
-      {:ex_spec,             "~> 1.0.0",  only: :test},
-      {:guardian,            "~> 0.10.0"},
-      {:hound,               "~> 0.8",    only: :test},
-      {:mix_test_watch,      "~> 0.2",    only: :dev}
+      {:ex_machina,          "~>0.6",    only: [:dev, :test]},
+      {:ex_spec,             "~> 1.0.0", only: :test},
+      {:guardian,            "0.9.0"},
+      {:hound,               "~> 0.8",   only: :test},
+      {:mix_test_watch,      "~> 0.2",   only: :dev}
     ]
   end
 

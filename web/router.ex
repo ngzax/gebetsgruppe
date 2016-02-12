@@ -5,6 +5,11 @@ defmodule Gebetsgruppe.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,17 +19,30 @@ defmodule Gebetsgruppe.Router do
   end
 
   # Public Routes
-  scope alias: Gebetsgruppe do
+  scope "/", Gebetsgruppe do
     pipe_through :browser
-      get "/gebets",     GebetController, :index
-      get "/gebets/:id", GebetController, :show
-      get "/",           PageController,  :index
+    
+    get "/bruders",     BruderController, :index
+    get "/briders/:id", BruderController, :show
+
+    get "/gebets",      GebetController,  :index
+    get "/gebets/:id",  GebetController,  :show
+                                          
+    get "/",            PageController,   :index
   end
 
-  # Future private routes
-  # scope alias: Gebetsgruppe do
-  #   pipe_through [:browser, :auth]
-  # end
+  # Private routes
+  scope "/", Gebetsgruppe do
+    pipe_through [:browser, :auth]
+    
+    get  "/login",    SessionController, :new,    as: :login
+    post "/login",    SessionController, :create, as: :login
+    
+    delete "/logout", SessionController, :delete, as: :logout
+    get    "/logout", SessionController, :delete, as: :logout
+
+    resources "/users", UserController
+  end
     
   # Public API
   scope "/api/v0", alias: Gebetsgruppe do

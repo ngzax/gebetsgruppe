@@ -20,4 +20,7 @@ addons:
 services:
   - postgresql
 
+before_script:
+  - psql -c 'create database gebetsgruppe_test;' -U postgres
+
 script: mix test

@@ -1,8 +1,10 @@
 defmodule Gebetsgruppe.Bruder do
   use Gebetsgruppe.Web, :model
   alias Gebetsgruppe.Repo
+
+  @primary_key {:id, :binary_id, autogenerate: true}
   
-  schema "bruders" do
+  schema "brueder" do
     field :name,               :string
     field :email,              :string
     field :encrypted_password, :string

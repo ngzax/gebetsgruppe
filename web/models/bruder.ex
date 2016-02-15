@@ -8,8 +8,11 @@ defmodule Gebetsgruppe.Bruder do
     field :name,               :string
     field :email,              :string
     field :encrypted_password, :string
-    field :password,           :string, virtual: true
+    field :password,           :string,  virtual: true
+    field :is_admin,           :boolean, default: false
     timestamps
+    
+    has_many :genehmigungen, PhoenixGuardian.Genehmigung
   end
 
   @required_fields ~w(name email encrypted_password password)
@@ -19,22 +22,19 @@ defmodule Gebetsgruppe.Bruder do
   # The following code was (mostly) cargo-culted wholesale from https://github.com/hassox/phoenix_guardian/blob/master/web/models/user.ex
   # I did need to update a few things for more recent Ecto, however.
   # ----
-    
-  def from_email(nil), do: { :error, :not_found }
-  def from_email(email) do
-    Repo.one(User, email: email)
+  def admin?(bruder) do
+    bruder.is_admin
   end
-
+  
   def create_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(name email password),~w(encrypted_password))
     |> maybe_update_password
   end
 
-  def update_changeset(model, params \\ :empty) do
-    model
-    |> cast(params, ~w(), ~w(name email password))
-    |> maybe_update_password
+  def from_email(nil), do: { :error, :not_found }
+  def from_email(email) do
+    Repo.one(Bruder, email: email)
   end
 
   def login_changeset(model), do: model |> cast(%{}, ~w(), ~w(email password))
@@ -45,10 +45,24 @@ defmodule Gebetsgruppe.Bruder do
     |> validate_password
   end
 
+  def make_admin!(bruder) do
+    bruder
+    |> cast(%{is_admin: true}, ~w(), ~w(is_admin))
+    |> Repo.update!
+  end
+  
+  def update_changeset(model, params \\ :empty) do
+    model
+    |> cast(params, ~w(), ~w(name email password))
+    |> maybe_update_password
+  end
+
   def valid_password?(nil, _), do: false
   def valid_password?(_, nil), do: false
   def valid_password?(password, crypted), do: Comeonin.Bcrypt.checkpw(password, crypted)
 
+  # ----
+  
   defp maybe_update_password(changeset) do
     case Ecto.Changeset.fetch_change(changeset, :password) do
       { :ok, password } ->

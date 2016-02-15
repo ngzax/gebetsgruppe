@@ -13,6 +13,7 @@ defmodule Gebetsgruppe.Repo.Migrations.AlterBruders do
       add :email,              :citext,  [null: false]
       add :encrypted_password, :text,    [null: false]
       add :is_admin,           :boolean, [null: false, default: false]
+      timestamps
     end
     
     create index(:brueder, [:email], unique: true)

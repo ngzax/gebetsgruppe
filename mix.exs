@@ -72,7 +72,18 @@ defmodule Gebetsgruppe.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop",   "ecto.setup"],
+      "test":       [&setup_db/1,   "test"]
+    ]
   end
+
+  defp setup_db(_) do
+    # Create the database, run migrations
+    Mix.Task.run "ecto.drop",    ["--quiet"]
+    Mix.Task.run "ecto.create",  ["--quiet"]
+    Mix.Task.run "ecto.migrate", ["--quiet"]
+  end
+
 end

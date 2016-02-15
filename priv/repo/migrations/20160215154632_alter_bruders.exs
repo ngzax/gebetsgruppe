@@ -2,7 +2,7 @@ defmodule Gebetsgruppe.Repo.Migrations.AlterBruders do
   use Ecto.Migration
 
   def up do
-    execute("CREATE EXTENSION IF NOT EXISTS citext;")
+    execute("CREATE EXTENSION IF NOT EXISTS \"citext\";")
     execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
     
     drop table(:bruders)

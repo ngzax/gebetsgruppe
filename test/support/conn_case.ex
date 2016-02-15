@@ -21,9 +21,11 @@ defmodule Gebetsgruppe.ConnCase do
       use Phoenix.ConnTest
 
       alias Gebetsgruppe.Repo
+      
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
 
+      import Gebetsgruppe.Factory
       import Gebetsgruppe.Router.Helpers
 
       # The default endpoint for testing

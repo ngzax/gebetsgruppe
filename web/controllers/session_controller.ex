@@ -3,7 +3,7 @@ defmodule Gebetsgruppe.SessionController do
 
   alias Gebetsgruppe.Bruder
 
-  def new(conn, params) do
+  def new(conn, _) do
     changeset = Bruder.login_changeset(%Bruder{})
     render(conn, Gebetsgruppe.SessionView, "new.html", changeset: changeset)
   end

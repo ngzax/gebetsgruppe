@@ -2,14 +2,14 @@ defmodule Gebetsgruppe.BruderController do
   use Gebetsgruppe.Web, :controller
 
   alias Gebetsgruppe.Bruder
-  alias Gebetsgruppe.SessionController
+  # alias Gebetsgruppe.SessionController
 
-  plug :scrub_params, "bruder" when action in [:create, :update]
-  plug :action
+  # plug :scrub_params, "bruder" when action in [:create, :update]
+  # plug :action
 
   def index(conn, _params) do
-    bruders = Repo.all(Bruder)
-    render(conn, "index.html", bruders: bruders)
+    brueder = Repo.all(Bruder)
+    render(conn, "index.html", brueder: brueder)
   end
 
   def new(conn, _params) do

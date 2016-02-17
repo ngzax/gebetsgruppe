@@ -20,8 +20,8 @@ defmodule Gebetsgruppe.Router do
   scope "/", Gebetsgruppe do
     pipe_through :browser
     
-    get "/bruders",     BruderController, :index
-    get "/bruders/:id", BruderController, :show
+    get "/brueder",     BruderController, :index
+    get "/brueder/:id", BruderController, :show
 
     get "/gebets",      GebetController,  :index
     get "/gebets/:id",  GebetController,  :show

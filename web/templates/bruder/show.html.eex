@@ -1,0 +1,3 @@
+<h2>A Brother</h2>
+
+<b><%= @bruder.name %></b>

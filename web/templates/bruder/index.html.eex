@@ -1,0 +1,12 @@
+<h2>Brothers</h2>
+
+<table class="table">
+  <%= for bruder <- @brueder do %>
+    <tr>
+      <td><b><%= bruder.id %></b></td>
+      <td><%= bruder.name %></td>
+      <td><%= bruder.email %></td>
+      <td><%= link "View", to: bruder_path(@conn, :show, bruder.id) %></td>
+    </tr>
+  <% end %>
+</table>

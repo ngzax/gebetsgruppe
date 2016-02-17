@@ -59,7 +59,7 @@ defmodule Gebetsgruppe.Mixfile do
       {:ex_machina,          "~>0.6",    only: [:dev, :test]},
       {:ex_spec,             "~> 1.0.0", only: :test},
       {:hound,               "~> 0.8",   only: :test},
-      {:mix_test_watch,      "~> 0.2",   only: :dev},
+      {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},
       {:uuid,                "~> 1.1"}
     ]
   end
@@ -79,10 +79,12 @@ defmodule Gebetsgruppe.Mixfile do
   end
 
   defp setup_db(_) do
-    # Create the database, run migrations
-    Mix.Task.run "ecto.drop",    ["--quiet"]
-    Mix.Task.run "ecto.create",  ["--quiet"]
-    Mix.Task.run "ecto.migrate", ["--quiet"]
+    unless List.keyfind(Application.loaded_applications(), project[:app], 0) do
+      # Create the database, run migrations
+      Mix.Task.run "ecto.drop",    ["--quiet"]
+      Mix.Task.run "ecto.create",  ["--quiet"]
+      Mix.Task.run "ecto.migrate", ["--quiet"]
+    end
   end
-
+  
 end

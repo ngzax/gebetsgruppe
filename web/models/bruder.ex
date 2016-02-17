@@ -11,8 +11,6 @@ defmodule Gebetsgruppe.Bruder do
     field :password,           :string,  virtual: true
     field :is_admin,           :boolean, default: false
     timestamps
-    
-    has_many :genehmigungen, PhoenixGuardian.Genehmigung
   end
 
   @required_fields ~w(name email encrypted_password password)

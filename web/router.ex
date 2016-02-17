@@ -6,8 +6,6 @@ defmodule Gebetsgruppe.Router do
   end
 
   pipeline :auth do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
   end
 
   pipeline :browser do
@@ -23,7 +21,7 @@ defmodule Gebetsgruppe.Router do
     pipe_through :browser
     
     get "/bruders",     BruderController, :index
-    get "/briders/:id", BruderController, :show
+    get "/bruders/:id", BruderController, :show
 
     get "/gebets",      GebetController,  :index
     get "/gebets/:id",  GebetController,  :show

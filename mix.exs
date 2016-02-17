@@ -58,7 +58,6 @@ defmodule Gebetsgruppe.Mixfile do
       {:cowboy,              "~> 1.0"},
       {:ex_machina,          "~>0.6",    only: [:dev, :test]},
       {:ex_spec,             "~> 1.0.0", only: :test},
-      {:guardian,            "0.9.0"},
       {:hound,               "~> 0.8",   only: :test},
       {:mix_test_watch,      "~> 0.2",   only: :dev},
       {:uuid,                "~> 1.1"}

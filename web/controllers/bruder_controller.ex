@@ -4,9 +4,6 @@ defmodule Gebetsgruppe.BruderController do
   alias Gebetsgruppe.Bruder
   alias Gebetsgruppe.SessionController
 
-  # plug Guardian.Plug.EnsureSession,     %{ on_failure: { SessionController, :new } } when not action in [:new, :create]
-  plug Guardian.Plug.EnsurePermissions, %{ on_failure: { __MODULE__, :forbidden }, default: [:write_profile] } when action in [:edit, :update]
-
   plug :scrub_params, "bruder" when action in [:create, :update]
   plug :action
 

@@ -5,9 +5,10 @@ defmodule Gebetsgruppe.Factory do
 
   def factory(:bruder) do
     %Bruder{
-      name:               "Cindy Loo Who",
-      email:              sequence(:email, &"email-#{&1}@ngzax.com"),
-      encrypted_password: UUID.uuid4()
+      name:     "Cindy Loo Who",
+      username: sequence(:username, &"cloowho-#{&1}"),
+      email:    sequence(:email, &"email-#{&1}@ngzax.com"),
+      hash:     UUID.uuid4()
     }
   end
 

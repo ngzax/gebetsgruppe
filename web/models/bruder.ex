@@ -5,15 +5,17 @@ defmodule Gebetsgruppe.Bruder do
   @primary_key {:id, :binary_id, autogenerate: true}
   
   schema "brueder" do
-    field :name,               :string
-    field :email,              :string
-    field :encrypted_password, :string
-    field :password,           :string,  virtual: true
-    field :is_admin,           :boolean, default: false
+    field :name,          :string
+    field :email,         :string
+    field :username,      :string
+    field :hash,          :string
+    field :recovery_hash, :string
+    field :is_admin,      :boolean, default: false
+    field :password,      :string,  virtual: true
     timestamps
   end
 
-  @required_fields ~w(name email encrypted_password password)
+  @required_fields ~w(name email username hash is_admin)
   @optional_fields ~w()
 
   # ----
@@ -26,7 +28,7 @@ defmodule Gebetsgruppe.Bruder do
   
   def create_changeset(model, params \\ :empty) do
     model
-    |> cast(params, ~w(name email password),~w(encrypted_password))
+    |> cast(params, ~w(name email password), ~w(hash))
     |> maybe_update_password
   end
 
@@ -65,13 +67,13 @@ defmodule Gebetsgruppe.Bruder do
     case Ecto.Changeset.fetch_change(changeset, :password) do
       { :ok, password } ->
         changeset
-        |> Ecto.Changeset.put_change(:encrypted_password, Comeonin.Bcrypt.hashpwsalt(password))
+        |> Ecto.Changeset.put_change(:hash, Comeonin.Bcrypt.hashpwsalt(password))
       :error -> changeset
     end
   end
 
   defp validate_password(changeset) do
-    case Ecto.Changeset.get_field(changeset, :encrypted_password) do
+    case Ecto.Changeset.get_field(changeset, :hash) do
       nil -> password_incorrect_error(changeset)
       crypted -> validate_password(changeset, crypted)
     end

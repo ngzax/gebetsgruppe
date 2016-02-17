@@ -1,11 +1,14 @@
-# gebetsgruppe
+# Gebetsgruppe : Die Gruppe für die Gebete. In Echtzeit.
 
-Die Gebetsgruppe
+[![Build Status](https://travis-ci.org/ngzax/gebetsgruppe.svg?branch=master)](https://travis-ci.org/ngzax/gebetsgruppe)
 
+> "Rejoice in confident hope. Be patient in trouble, and keep on praying"
+
+> -- Romans, 12:12
 
 ## Usage
 
-TBD
+Create or Join a Group. Add your prayers. Read your brothers' prayers. Pray.
 
 
 ## Important links

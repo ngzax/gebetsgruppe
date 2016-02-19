@@ -1,6 +1,7 @@
 defmodule Gebetsgruppe.Router do
   use Gebetsgruppe.Web, :router
-
+  use Addict.RoutesHelper
+  
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -19,6 +20,8 @@ defmodule Gebetsgruppe.Router do
   # Public Routes
   scope "/", Gebetsgruppe do
     pipe_through :browser
+    
+    addict :routes
     
     get "/brueder",     BruderController, :index
     get "/brueder/:id", BruderController, :show

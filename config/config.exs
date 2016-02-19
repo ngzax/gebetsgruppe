@@ -14,6 +14,17 @@ config :gebetsgruppe, Gebetsgruppe.Endpoint,
   pubsub: [name: Gebetsgruppe.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Addict is for User Login/Authorization
+config :addict, 
+  not_logged_in_url: "/error",  # the URL where users will be redirected to
+  db: Gebetsgruppe.MyRepo,
+  user: Gebetsgruppe.MyUser,
+  register_from_email: "Registration <welcome@yourawesomeapp.com>", # email registered users will receive from address
+  register_subject: "Welcome to yourawesomeapp!",                   # email registered users will receive subject
+  password_recover_from_email: "Password Recovery <no-reply@yourawesomeapp.com>",
+  password_recover_subject: "You requested a password recovery link",
+  email_templates: Gebetsgruppe.MyEmailTemplates                    # email templates for sending e-mails, more on this further down
+  
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -32,6 +32,7 @@ defmodule Gebetsgruppe.Mixfile do
       :phoenix,
       :phoenix_ecto,
       :phoenix_html,
+      :addict,
       :comeonin,
       :cowboy,
       :logger,
@@ -52,14 +53,16 @@ defmodule Gebetsgruppe.Mixfile do
       {:phoenix_ecto,        "~> 1.1"},
       {:postgrex,            "~> 0.11.0"},
       {:phoenix_html,        "~> 2.1"},
-      {:phoenix_live_reload, "~> 1.0",   only: :dev},
+      {:phoenix_live_reload, "~> 1.0",     only: :dev},
       
-      {:comeonin,            "~> 2.1.0"},
+      {:addict,              "~> 0.1.0"},
+      {:comeonin,            "~> 2.1.0",   override: true},
       {:cowboy,              "~> 1.0"},
-      {:ex_machina,          "~>0.6",    only: [:dev, :test]},
-      {:ex_spec,             "~> 1.0.0", only: :test},
-      {:hound,               "~> 0.8",   only: :test},
-      {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},
+      {:ecto,                "~> 1.1",     override: true},
+      {:ex_machina,          "~> 0.6",     only: [:dev, :test]},
+      {:ex_spec,             "~> 1.0.0",   only: :test},
+      {:hound,               "~> 0.8",     only: :test},
+      {:mix_test_watch,      "~> 0.2",     only: [:dev, :test]},
       {:uuid,                "~> 1.1"}
     ]
   end

@@ -1,6 +1,7 @@
 defmodule Gebetsgruppe.BruderController do
   use Gebetsgruppe.Web, :controller
-
+  use Addict.BaseController
+  
   alias Gebetsgruppe.Bruder
   # alias Gebetsgruppe.SessionController
 

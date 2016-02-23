@@ -1,5 +1,6 @@
 # App artifacts
 /_build
+/bower_components
 /db
 /deps
 /*.ez

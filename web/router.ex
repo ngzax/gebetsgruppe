@@ -1,6 +1,6 @@
 defmodule Gebetsgruppe.Router do
-  use Gebetsgruppe.Web, :router
   use Addict.RoutesHelper
+  use Gebetsgruppe.Web, :router
   
   pipeline :api do
     plug :accepts, ["json"]
@@ -21,7 +21,7 @@ defmodule Gebetsgruppe.Router do
   scope "/", Gebetsgruppe do
     pipe_through :browser
     
-    addict :routes
+    get "/",            PageController,   :index
     
     get "/brueder",     BruderController, :index
     get "/brueder/:id", BruderController, :show
@@ -29,21 +29,21 @@ defmodule Gebetsgruppe.Router do
     get "/gebets",      GebetController,  :index
     get "/gebets/:id",  GebetController,  :show
                                           
-    get "/",            PageController,   :index
+    addict :routes
   end
 
   # Private routes
-  scope "/", Gebetsgruppe do
-    pipe_through [:browser, :auth]
-    
-    get  "/login",    SessionController, :new,    as: :login
-    post "/login",    SessionController, :create, as: :login
-    
-    delete "/logout", SessionController, :delete, as: :logout
-    get    "/logout", SessionController, :delete, as: :logout
-
-    resources "/users", UserController
-  end
+  # scope "/", Gebetsgruppe do
+  #   pipe_through [:browser, :auth]
+  #
+  #   get  "/login",    SessionController, :new,    as: :login
+  #   post "/login",    SessionController, :create, as: :login
+  #
+  #   delete "/logout", SessionController, :delete, as: :logout
+  #   get    "/logout", SessionController, :delete, as: :logout
+  #
+  #   resources "/users", UserController
+  # end
     
   # Public API
   scope "/api/v0", alias: Gebetsgruppe do

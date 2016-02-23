@@ -1,7 +1,7 @@
 defmodule Gebetsgruppe.Endpoint do
   use Phoenix.Endpoint, otp_app: :gebetsgruppe
 
-  socket "/socket", Gebetsgruppe.UserSocket
+  socket "/socket", Gebetsgruppe.BruderSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

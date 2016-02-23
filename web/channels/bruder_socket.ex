@@ -1,4 +1,4 @@
-defmodule Gebetsgruppe.UserSocket do
+defmodule Gebetsgruppe.BruderSocket do
   use Phoenix.Socket
 
   ## Channels

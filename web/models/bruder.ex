@@ -18,10 +18,6 @@ defmodule Gebetsgruppe.Bruder do
   @required_fields ~w(name email username hash is_admin)
   @optional_fields ~w()
 
-  # ----
-  # The following code was (mostly) cargo-culted wholesale from https://github.com/hassox/phoenix_guardian/blob/master/web/models/user.ex
-  # I did need to update a few things for more recent Ecto, however.
-  # ----
   def admin?(bruder) do
     bruder.is_admin
   end

@@ -48,7 +48,7 @@ defmodule Gebetsgruppe.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix,             "~> 1.0.3"},
+      {:phoenix,             "~> 1.1"},
       {:phoenix_ecto,        "~> 1.1"},
       {:postgrex,            "~> 0.11.0"},
       {:phoenix_html,        "~> 2.1"},
@@ -58,9 +58,12 @@ defmodule Gebetsgruppe.Mixfile do
       {:cowboy,              "~> 1.0"},
       {:ex_machina,          "~>0.6",    only: [:dev, :test]},
       {:ex_spec,             "~> 1.0.0", only: :test},
-      {:guardian,            "0.9.0"},
+      {:guardian,            "0.10.0",   override: true},
+      {:guardian_db,         "0.4.0",    path: "/Users/daryl/Code/guardian_db", override: true},
       {:hound,               "~> 0.8",   only: :test},
+      {:mailman,             "~> 0.2.1"},
       {:mix_test_watch,      "~> 0.2",   only: :dev},
+      {:sentinel,            "0.0.4"},
       {:uuid,                "~> 1.1"}
     ]
   end

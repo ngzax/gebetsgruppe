@@ -23,6 +23,9 @@ config :guardian, Guardian,
   secret_key:    "LetUsPray",
   serializer:    Gebetsgruppe.GuardianSerializer
  
+config :guardian_db, GuardianDb,
+  repo: Gebetsgruppe.Repo
+    
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

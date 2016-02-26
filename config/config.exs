@@ -41,6 +41,18 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
+# Sentinel is a "Phoenix Authentication library that wraps Guardian for extra functionality"
+config :sentinel,
+  app_name:        "Gebetsgruppe",
+  auth_handler:    Sentinel.AuthHandler,  # optional
+  confirmable:     :false,                # possible options {:false, :required, :optional}, optional config
+  crypto_provider: Comeonin.Bcrypt,
+  email_sender:    "test@example.com",
+  endpoint:        Gebetsgruppe.Endpoint,
+  repo:            Gebetsgruppe.Repo,
+  router:          Gebetsgruppe.Router,
+  user_model:      Gebetsgruppe.Bruder
+    
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

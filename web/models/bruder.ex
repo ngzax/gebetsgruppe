@@ -5,17 +5,22 @@ defmodule Gebetsgruppe.Bruder do
   @primary_key {:id, :binary_id, autogenerate: true}
   
   schema "brueder" do
-    field :name,               :string
-    field :email,              :string
-    field :encrypted_password, :string
-    field :password,           :string,  virtual: true
-    field :is_admin,           :boolean, default: false
+    field :name,                        :string
+    field :confirmed_at,                Ecto.DateTime
+    field :email,                       :string
+    field :role,                        :string
+    field :hashed_password,             :string
+    field :hashed_confirmation_token,   :string
+    field :hashed_password_reset_token, :string
+    field :is_admin,                    :boolean, default: false
+    field :password,                    :string,  virtual: true
+    field :unconfirmed_email,           :string    
     timestamps
     
     has_many :genehmigungen, PhoenixGuardian.Genehmigung
   end
 
-  @required_fields ~w(name email encrypted_password password)
+  @required_fields ~w(name email hashed_password password)
   @optional_fields ~w()
 
   # ----
@@ -28,7 +33,7 @@ defmodule Gebetsgruppe.Bruder do
   
   def create_changeset(model, params \\ :empty) do
     model
-    |> cast(params, ~w(name email password),~w(encrypted_password))
+    |> cast(params, ~w(name email password),~w(hashed_password))
     |> maybe_update_password
   end
 
@@ -51,6 +56,9 @@ defmodule Gebetsgruppe.Bruder do
     |> Repo.update!
   end
   
+  def permissions(role) do
+  end
+  
   def update_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(), ~w(name email password))
@@ -67,13 +75,13 @@ defmodule Gebetsgruppe.Bruder do
     case Ecto.Changeset.fetch_change(changeset, :password) do
       { :ok, password } ->
         changeset
-        |> Ecto.Changeset.put_change(:encrypted_password, Comeonin.Bcrypt.hashpwsalt(password))
+        |> Ecto.Changeset.put_change(:hashed_password, Comeonin.Bcrypt.hashpwsalt(password))
       :error -> changeset
     end
   end
 
   defp validate_password(changeset) do
-    case Ecto.Changeset.get_field(changeset, :encrypted_password) do
+    case Ecto.Changeset.get_field(changeset, :hashed_password) do
       nil -> password_incorrect_error(changeset)
       crypted -> validate_password(changeset, crypted)
     end

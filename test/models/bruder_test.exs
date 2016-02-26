@@ -4,7 +4,7 @@ defmodule Gebetsgruppe.BruderTest do
   alias Gebetsgruppe.Bruder
 
   # That password is "pray" bcrypted via https://www.bcrypt-generator.com/
-  @valid_attrs %{email: "bruder@kirche.com", encrypted_password: "$2a$08$2fPajyRgQEyA6PA7KU/1CurOz26ITt7CY6qox3vR10FRK8iA8oaDe", name: "Big Bruder", password: "pray"}
+  @valid_attrs %{email: "bruder@kirche.com", hashed_password: "$2a$08$2fPajyRgQEyA6PA7KU/1CurOz26ITt7CY6qox3vR10FRK8iA8oaDe", name: "Big Bruder", password: "pray"}
   @invalid_attrs %{}
 
   setup do

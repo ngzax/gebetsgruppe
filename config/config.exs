@@ -51,7 +51,7 @@ config :sentinel,
   endpoint:        Gebetsgruppe.Endpoint,
   repo:            Gebetsgruppe.Repo,
   router:          Gebetsgruppe.Router,
-  user_model:      Gebetsgruppe.Bruder
+  user_model:      Gebetsgruppe.User
     
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -1,22 +1,22 @@
-defmodule Gebetsgruppe.Genehmigung do
+defmodule Gebetsgruppe.Authorization do
   use Gebetsgruppe.Web, :model
 
-  schema "genehmigungen" do
-    field :provider,              :string
-    field :uid,                   :string
-    field :token,                 :string
-    field :refresh_token,         :string
+  schema "authorizations" do
     field :expires_at,            :integer
     field :password,              :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    field :provider,              :string
+    field :refresh_token,         :string
+    field :token,                 :string
+    field :uid,                   :string
 
-    belongs_to :bruder, Gebetsgruppe.Bruder
+    belongs_to :user, Gebetsgruppe.User, type: :binary_id
 
     timestamps
   end
 
-  @required_fields ~w(provider uid bruder_id token)
-  @optional_fields ~w(refresh_token expires_at)
+  @required_fields ~w(provider token uid user_id)
+  @optional_fields ~w(expires_at refresh_token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -26,8 +26,8 @@ defmodule Gebetsgruppe.Genehmigung do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> foreign_key_constraint(:bruder_id)
     |> unique_constraint(:provider_uid)
+    |> foreign_key_constraint(:user_id)
   end
 
 end

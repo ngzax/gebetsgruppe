@@ -1,17 +1,17 @@
 defmodule Gebetsgruppe.SessionController do
   use Gebetsgruppe.Web, :controller
 
-  alias Gebetsgruppe.Bruder
+  alias Gebetsgruppe.User
 
   def new(conn, _) do
-    changeset = Bruder.login_changeset(%Bruder{})
+    changeset = User.login_changeset(%User{})
     render(conn, Gebetsgruppe.SessionView, "new.html", changeset: changeset)
   end
 
   def create(conn, params = %{}) do
-    user = Repo.one(BruderQuery.by_email(params["user"]["email"] || ""))
+    user = Repo.one(UserQuery.by_email(params["user"]["email"] || ""))
     if user do
-      changeset = Bruder.login_changeset(user, params["user"])
+      changeset = User.login_changeset(user, params["user"])
       if changeset.valid? do
         conn
         |> put_flash(:info, "Logged in.")
@@ -21,7 +21,7 @@ defmodule Gebetsgruppe.SessionController do
         render(conn, "new.html", changeset: changeset)
       end
     else
-      changeset = Bruder.login_changeset(%Bruder{}) |> Ecto.Changeset.add_error(:login, "not found")
+      changeset = User.login_changeset(%User{}) |> Ecto.Changeset.add_error(:login, "not found")
       render(conn, "new.html", changeset: changeset)
     end
   end

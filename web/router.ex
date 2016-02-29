@@ -23,9 +23,6 @@ defmodule Gebetsgruppe.Router do
   scope "/", Gebetsgruppe do
     pipe_through :browser
     
-    get "/bruders",     BruderController, :index
-    get "/briders/:id", BruderController, :show
-
     get "/gebets",      GebetController,  :index
     get "/gebets/:id",  GebetController,  :show
                                           

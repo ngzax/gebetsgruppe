@@ -1,34 +1,35 @@
-defmodule Gebetsgruppe.Bruder do
+defmodule Gebetsgruppe.User do
   use Gebetsgruppe.Web, :model
   alias Gebetsgruppe.Repo
 
-  @primary_key {:id, :binary_id, autogenerate: true}
+  @primary_key      {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   
-  schema "brueder" do
-    field :name,                        :string
+  schema "users" do
     field :confirmed_at,                Ecto.DateTime
     field :email,                       :string
-    field :role,                        :string
     field :hashed_password,             :string
     field :hashed_confirmation_token,   :string
     field :hashed_password_reset_token, :string
     field :is_admin,                    :boolean, default: false
+    field :name,                        :string
     field :password,                    :string,  virtual: true
+    field :role,                        :string
     field :unconfirmed_email,           :string    
     timestamps
     
-    has_many :genehmigungen, PhoenixGuardian.Genehmigung
+    has_many :authorizations, Gebetsgruppe.Authorization
   end
 
-  @required_fields ~w(name email hashed_password password)
-  @optional_fields ~w()
+  @required_fields ~w(email hashed_password is_admin name)
+  @optional_fields ~w(confirmed_at role unconfirmed_email)
 
   # ----
   # The following code was (mostly) cargo-culted wholesale from https://github.com/hassox/phoenix_guardian/blob/master/web/models/user.ex
   # I did need to update a few things for more recent Ecto, however.
   # ----
-  def admin?(bruder) do
-    bruder.is_admin
+  def admin?(u) do
+    u.is_admin
   end
   
   def create_changeset(model, params \\ :empty) do
@@ -39,7 +40,7 @@ defmodule Gebetsgruppe.Bruder do
 
   def from_email(nil), do: { :error, :not_found }
   def from_email(email) do
-    Repo.one(Bruder, email: email)
+    Repo.one(User, email: email)
   end
 
   def login_changeset(model), do: model |> cast(%{}, ~w(), ~w(email password))
@@ -50,8 +51,8 @@ defmodule Gebetsgruppe.Bruder do
     |> validate_password
   end
 
-  def make_admin!(bruder) do
-    bruder
+  def make_admin!(user) do
+    user
     |> cast(%{is_admin: true}, ~w(), ~w(is_admin))
     |> Repo.update!
   end

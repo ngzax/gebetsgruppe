@@ -1,12 +1,12 @@
 defmodule Gebetsgruppe.Factory do
   use ExMachina.Ecto, repo: Gebetsgruppe.Repo
 
-  alias Gebetsgruppe.Bruder
-  alias Gebetsgruppe.Genehmigung
-  alias Gebetsgruppe.GuardianToken
+  alias Gebetsgruppe.User
+  alias Gebetsgruppe.Authorization
+  # alias Gebetsgruppe.GuardianToken
 
-  def factory(:bruder) do
-    %Bruder{
+  def factory(:user) do
+    %User{
       name:            "Cindy Loo Who",
       email:           sequence(:email, &"email-#{&1}@ngzax.com"),
       hashed_password: UUID.uuid4()
@@ -20,16 +20,16 @@ defmodule Gebetsgruppe.Factory do
   # end
 
   def factory(:authorization) do
-    %Genehmigung{
+    %Authorization{
       uid:      sequence(:uid, &"uid-#{&1}"),
-      bruder:   build(:bruder),
+      user:     build(:user),
       provider: "identity",
       token:    Comeonin.Bcrypt.hashpwsalt("sekrit")
     }
   end
 
-  def with_authorization(bruder, opts \\ []) do
-    opts = opts ++ [bruder: bruder, uid: bruder.email]
+  def with_authorization(user, opts \\ []) do
+    opts = opts ++ [user: user, uid: user.email]
     create(:authorization, opts)
   end
 end

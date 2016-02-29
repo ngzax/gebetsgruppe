@@ -6,7 +6,7 @@
 # and so on) as they will fail if something goes wrong.
 
 Gebetsgruppe.Repo.insert!(    
-  %Gebetsgruppe.Bruder{
+  %Gebetsgruppe.User{
       name:               "Daryl Richter",
       email:              "daryl@ngzax.com",
       encrypted_password: Comeonin.Bcrypt.hashpwsalt("lag00na="),

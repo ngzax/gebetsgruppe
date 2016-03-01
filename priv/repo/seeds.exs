@@ -5,12 +5,12 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Gebetsgruppe.Repo.insert!(    
+Gebetsgruppe.Repo.insert!(
   %Gebetsgruppe.User{
-      name:               "Daryl Richter",
-      email:              "daryl@ngzax.com",
-      encrypted_password: Comeonin.Bcrypt.hashpwsalt("lag00na="),
-      is_admin:           true
+      name:            "Daryl Richter",
+      email:           "daryl@ngzax.com",
+      hashed_password: Comeonin.Bcrypt.hashpwsalt("lag00na="),
+      is_admin:        true
   }
 )
 

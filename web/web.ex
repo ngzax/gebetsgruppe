@@ -35,6 +35,7 @@ defmodule Gebetsgruppe.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Gebetsgruppe.Router.Helpers
+      import Gebetsgruppe.Controller.Helpers
     end
   end
 
@@ -49,6 +50,7 @@ defmodule Gebetsgruppe.Web do
       use Phoenix.HTML
 
       import Gebetsgruppe.Router.Helpers
+      import Gebetsgruppe.ViewHelpers
     end
   end
 
@@ -74,4 +76,25 @@ defmodule Gebetsgruppe.Web do
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
+
+  @doc """
+  Macros brought in (aka Cargo-culted) from PhoenixGuardian.
+  """
+  def admin_controller do
+    quote do
+      use Phoenix.Controller, namespace: Gebetsgruppe.Admin
+      use Guardian.Phoenix.Controller, key: :admin
+
+      alias Gebetsgruppe.Repo
+      alias Guardian.Plug.EnsureAuthenticated
+      alias Guardian.Plug.EnsurePermissions
+
+      import Ecto.Model
+      import Ecto.Query, only: [from: 1, from: 2]
+
+      import Gebetsgruppe.Router.Helpers
+      import Gebetsgruppe.Controller.Helpers
+    end
+  end
+  
 end

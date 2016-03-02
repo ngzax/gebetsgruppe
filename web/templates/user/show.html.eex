@@ -1,0 +1,7 @@
+<h2>A Brother</h2>
+
+<ul>
+  <li><b><%= @user.name %></b></li>
+  <li><%= @user.email %></li>
+  <li><%= @user.is_admin %></li>
+</ul>

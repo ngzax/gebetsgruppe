@@ -16,12 +16,13 @@ config :gebetsgruppe, Gebetsgruppe.Endpoint,
 
 config :guardian, Guardian,
   allowed_algos: ["HS512"],      # optional
-  verify_module: Guardian.JWT,   # optional
+  hooks:         GuardianDb,
   issuer:        "Gebetsgruppe",
+  secret_key:    "LetUsPray",
+  serializer:    Gebetsgruppe.GuardianSerializer,
   ttl:           {10, :days},
   verify_issuer: false,          # optional
-  secret_key:    "LetUsPray",
-  serializer:    Gebetsgruppe.GuardianSerializer
+  verify_module: Guardian.JWT   # optional
  
 config :guardian_db, GuardianDb,
   repo: Gebetsgruppe.Repo
@@ -31,6 +32,17 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Local server example
+config :mailman,
+  port: 1234
+
+# Mailgun Example
+# config :mailman,
+#   port: 587,
+#   address: "smtp.mailgun.org",
+#   user_name: System.get_env("MAILGUN_USERNAME"),
+#   password: System.get_env("MAILGUN_PASSWORD")
+    
 config :mix_test_watch,
   tasks: [
     "test"
@@ -47,7 +59,7 @@ config :sentinel,
   auth_handler:    Sentinel.AuthHandler,  # optional
   confirmable:     :false,                # possible options {:false, :required, :optional}, optional config
   crypto_provider: Comeonin.Bcrypt,
-  email_sender:    "test@example.com",
+  email_sender:    "netz_meister@gebetsgruppe.com",
   endpoint:        Gebetsgruppe.Endpoint,
   repo:            Gebetsgruppe.Repo,
   router:          Gebetsgruppe.Router,

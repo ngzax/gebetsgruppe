@@ -35,7 +35,11 @@ defmodule Gebetsgruppe.Mixfile do
       :comeonin,
       :cowboy,
       :logger,
-      :postgrex
+      :oauth2,
+      :postgrex,
+      :ueberauth_github,
+      :ueberauth_identity,
+      :ueberauth_slack
     ]
   end
     
@@ -58,11 +62,15 @@ defmodule Gebetsgruppe.Mixfile do
       {:cowboy,              "~> 1.0"},
       {:ex_machina,          "~>0.6",    only: [:dev, :test]},
       {:ex_spec,             "~> 1.0.0", only: :test},
-      {:guardian,            "0.10.0",   override: true},
+      {:guardian,            "0.9.0"},
       {:hound,               "~> 0.8",   only: :test},
       {:mailman,             "~> 0.2.1"},
       {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},
       {:sentinel,            "0.0.4"},
+      {:ueberauth,           git: "https://github.com/ueberauth/ueberauth.git", override: true},
+      {:ueberauth_github,    "~>0.2.0"},
+      {:ueberauth_identity,  "~>0.2.1"},
+      {:ueberauth_slack,     "~>0.2.0"},
       {:uuid,                "~> 1.1"}
     ]
   end

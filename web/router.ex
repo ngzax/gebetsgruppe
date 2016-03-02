@@ -73,8 +73,8 @@ defmodule Gebetsgruppe.Router do
   scope "/auth", Gebetsgruppe do
     pipe_through [:browser, :browser_auth] # Use the default browser stack
 
-    get "/:identity", AuthController, :login
-    get "/:identity/callback", AuthController, :callback
+    get "/:identity",           AuthController, :login
+    get "/:identity/callback",  AuthController, :callback
     post "/:identity/callback", AuthController, :callback
   end
   
@@ -86,14 +86,14 @@ defmodule Gebetsgruppe.Router do
     get "/login",                    SessionController, :new, as: :login
     get "/login/:identity",          SessionController, :new
     
-    post "/auth/:identity/callback", SessionController, :callback
-    get "/logout",                   SessionController, :logout
-    delete "/logout",                SessionController, :logout, as: :logout
+    post   "/auth/:identity/callback", SessionController, :callback
+    get    "/logout",                  SessionController, :logout
+    delete "/logout",                  SessionController, :logout, as: :logout
     
-    post "/impersonate/:user_id",    SessionController, :impersonate, as: :impersonation
-    delete "/impersonate",           SessionController, :stop_impersonating
+    post   "/impersonate/:user_id", SessionController, :impersonate, as: :impersonation
+    delete "/impersonate",          SessionController, :stop_impersonating
 
-    resources "/users",              UserController
+    resources "/users", UserController
   end
   
   # Private routes

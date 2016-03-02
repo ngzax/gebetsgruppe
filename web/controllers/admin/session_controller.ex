@@ -13,7 +13,7 @@ defmodule Gebetsgruppe.Admin.SessionController do
   # We still want to use Ueberauth for checking the passwords etc
   # we have everything we need to check email / passwords and oauth already
   # but we only want to provide access for folks using email/pass
-  # plug Ueberauth, base_path: "/admin/auth", providers: [:identity]
+  plug Ueberauth, base_path: "/admin/auth", providers: [:identity]
 
   # Make sure that we have a valid token in the :admin area of the session
   # We've aliased Guardian.Plug.EnsureAuthenticated in our Gebetsgruppe.Web.admin_controller macro

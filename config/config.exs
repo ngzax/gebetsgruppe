@@ -54,16 +54,16 @@ config :phoenix, :generators,
   binary_id: false
 
 # Sentinel is a "Phoenix Authentication library that wraps Guardian for extra functionality"
-config :sentinel,
-  app_name:        "Gebetsgruppe",
-  auth_handler:    Sentinel.AuthHandler,  # optional
-  confirmable:     :false,                # possible options {:false, :required, :optional}, optional config
-  crypto_provider: Comeonin.Bcrypt,
-  email_sender:    "netz_meister@gebetsgruppe.com",
-  endpoint:        Gebetsgruppe.Endpoint,
-  repo:            Gebetsgruppe.Repo,
-  router:          Gebetsgruppe.Router,
-  user_model:      Gebetsgruppe.User
+# config :sentinel,
+#   app_name:        "Gebetsgruppe",
+#   auth_handler:    Sentinel.AuthHandler,  # optional
+#   confirmable:     :false,                # possible options {:false, :required, :optional}, optional config
+#   crypto_provider: Comeonin.Bcrypt,
+#   email_sender:    "netz_meister@gebetsgruppe.com",
+#   endpoint:        Gebetsgruppe.Endpoint,
+#   repo:            Gebetsgruppe.Repo,
+#   router:          Gebetsgruppe.Router,
+#   user_model:      Gebetsgruppe.User
 
 config :ueberauth, Ueberauth,
   providers: [

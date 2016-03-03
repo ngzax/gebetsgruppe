@@ -1,31 +1,7 @@
 defmodule Gebetsgruppe.Router do
   use Gebetsgruppe.Web, :router
-  require Sentinel
+  # require Sentinel
   
-  # This pipeline is created for use within the admin namespace.
-  # It looks for a valid token in the session - but in the 'admin' location of guardian
-  # This keeps the session credentials seperate for the main site, and the admin site
-  # It's very possible that a user is logged into the main site but not the admin
-  # or it could be that you're logged into both.
-  # This does not conflict with the browser_auth pipeline.
-  # If it doesn't find a JWT in the location it doesn't do anything
-  pipeline :admin_browser_auth do
-    plug Guardian.Plug.VerifySession, key: :admin
-    plug Guardian.Plug.LoadResource,  key: :admin
-  end
-  
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  # This pipeline if intended for API requests and looks for the JWT in the "Authorization" header
-  # In this case, it should be prefixed with "Bearer" so that it's looking for
-  # Authorization: Bearer <jwt>
-  pipeline :api_auth do
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.LoadResource
-  end
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -42,12 +18,36 @@ defmodule Gebetsgruppe.Router do
     plug Guardian.Plug.LoadResource
   end
   
+  # This pipeline is created for use within the admin namespace.
+  # It looks for a valid token in the session - but in the 'admin' location of guardian
+  # This keeps the session credentials seperate for the main site, and the admin site
+  # It's very possible that a user is logged into the main site but not the admin
+  # or it could be that you're logged into both.
+  # This does not conflict with the browser_auth pipeline.
+  # If it doesn't find a JWT in the location it doesn't do anything
+  pipeline :admin_browser_auth do
+    plug Guardian.Plug.VerifySession, key: :admin
+    plug Guardian.Plug.LoadResource,  key: :admin
+  end
+  
   # We need this pipeline to load the token when we're impersonating.
   # We don't want to load the resource though, just verify the token
   pipeline :impersonation_browser_auth do
     plug Guardian.Plug.VerifySession, key: :admin
   end
   
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  # This pipeline if intended for API requests and looks for the JWT in the "Authorization" header
+  # In this case, it should be prefixed with "Bearer" so that it's looking for
+  # Authorization: Bearer <jwt>
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+  end
+
   
   # Public Routes
   scope "/", Gebetsgruppe do
@@ -62,9 +62,9 @@ defmodule Gebetsgruppe.Router do
     get "/gebets",      GebetController,  :index
     get "/gebets/:id",  GebetController,  :show
     
-    resources "/users",          UserController
     resources "/authorizations", AuthorizationController
     resources "/tokens",         TokenController
+    resources "/users",          UserController
 
     get "/private",              PrivatePageController, :index
   end
@@ -97,25 +97,25 @@ defmodule Gebetsgruppe.Router do
   end
   
   # Private routes
-  scope "/", Gebetsgruppe do
-    pipe_through [:browser, :browser_auth]
-    
-    get  "/login",    SessionController, :new,    as: :login
-    post "/login",    SessionController, :create, as: :login
-    
-    delete "/logout", SessionController, :delete, as: :logout
-    get    "/logout", SessionController, :delete, as: :logout
-
-    resources "/users", UserController
-  end
+  # scope "/", Gebetsgruppe do
+  #   pipe_through [:browser, :browser_auth]
+  #
+  #   get  "/login",    SessionController, :new,    as: :login
+  #   post "/login",    SessionController, :create, as: :login
+  #
+  #   delete "/logout", SessionController, :delete, as: :logout
+  #   get    "/logout", SessionController, :delete, as: :logout
+  #
+  #   resources "/users", UserController
+  # end
     
   # Public API
-  scope "/api/v0", alias: Gebetsgruppe do
-    pipe_through [:api]
-      resources "/gebets", GebetController, only: [:index]
-      
-    Sentinel.mount
-  end
+  # scope "/api/v0", alias: Gebetsgruppe do
+  #   pipe_through [:api]
+  #     resources "/gebets", GebetController, only: [:index]
+  #
+  #   Sentinel.mount
+  # end
 
   # Private API
   # scope "/api/v0", alias: Gebetsgruppe do

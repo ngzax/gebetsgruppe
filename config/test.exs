@@ -9,6 +9,11 @@ config :gebetsgruppe, Gebetsgruppe.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+config :mix_test_watch,
+  tasks: [
+    "test"
+  ]
+
 # Configure your database
 config :gebetsgruppe, Gebetsgruppe.Repo,
   adapter: Ecto.Adapters.Postgres,

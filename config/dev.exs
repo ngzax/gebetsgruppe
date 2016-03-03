@@ -24,14 +24,6 @@ config :gebetsgruppe, Gebetsgruppe.Endpoint,
     ]
   ]
 
-# Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
-
-# Set a higher stacktrace during development.
-# Do not configure such in production as keeping
-# and calculating stacktraces is usually expensive.
-config :phoenix, :stacktrace_depth, 20
-
 # Configure your database
 config :gebetsgruppe, Gebetsgruppe.Repo,
   adapter: Ecto.Adapters.Postgres,
@@ -40,3 +32,16 @@ config :gebetsgruppe, Gebetsgruppe.Repo,
   database: "gebetsgruppe_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Do not include metadata nor timestamps in development logs
+config :logger, :console, format: "[$level] $message\n"
+
+config :mix_test_watch,
+  tasks: [
+    "test"
+  ]
+
+# Set a higher stacktrace during development.
+# Do not configure such in production as keeping
+# and calculating stacktraces is usually expensive.
+config :phoenix, :stacktrace_depth, 20

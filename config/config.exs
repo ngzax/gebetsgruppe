@@ -43,11 +43,6 @@ config :mailman,
 #   user_name: System.get_env("MAILGUN_USERNAME"),
 #   password: System.get_env("MAILGUN_PASSWORD")
     
-config :mix_test_watch,
-  tasks: [
-    "test"
-  ]
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,

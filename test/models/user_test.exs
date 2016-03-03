@@ -14,12 +14,12 @@ defmodule Gebetsgruppe.UserTest do
   end
   
   test "Can create a Valid User" do
-    changeset = User.create_changeset(%User{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "Won't create an Invalid User" do
-    changeset = User.create_changeset(%User{}, @invalid_attrs)
+    changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
 

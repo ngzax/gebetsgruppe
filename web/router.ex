@@ -1,6 +1,6 @@
 defmodule Gebetsgruppe.Router do
   use Gebetsgruppe.Web, :router
-  # require Sentinel
+  require Sentinel
   
   pipeline :browser do
     plug :accepts, ["html"]
@@ -110,12 +110,12 @@ defmodule Gebetsgruppe.Router do
   # end
     
   # Public API
-  # scope "/api/v0", alias: Gebetsgruppe do
-  #   pipe_through [:api]
-  #     resources "/gebets", GebetController, only: [:index]
-  #
-  #   Sentinel.mount
-  # end
+  scope "/api/v0", alias: Gebetsgruppe do
+    pipe_through [:api]
+      resources "/gebets", GebetController, only: [:index]
+
+    Sentinel.mount
+  end
 
   # Private API
   # scope "/api/v0", alias: Gebetsgruppe do

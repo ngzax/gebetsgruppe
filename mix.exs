@@ -17,11 +17,32 @@ defmodule Gebetsgruppe.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Gebetsgruppe, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+    [
+      mod: {Gebetsgruppe, []},
+      applications: applications(Mix.env)
+    ]
   end
 
+  def applications(env) when env in [:test] do
+    applications(:default) ++ [:ex_machina]
+  end
+  
+  def applications(_) do
+    [
+      :phoenix,
+      :phoenix_ecto,
+      :phoenix_html,
+      :comeonin,
+      :cowboy,
+      :logger,
+      :oauth2,
+      :postgrex,
+      :ueberauth_github,
+      :ueberauth_identity,
+      :ueberauth_slack
+    ]
+  end
+    
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
   defp elixirc_paths(_),     do: ["lib", "web"]
@@ -31,16 +52,26 @@ defmodule Gebetsgruppe.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix,             "~> 1.0.3"},
-      {:phoenix_ecto,        "~> 1.1"},
+      {:phoenix,             "~> 1.1"},
+      {:phoenix_ecto,        "~> 2.0"},
+      {:phoenix_html,        "~> 2.3"},
+      {:phoenix_live_reload, "~> 1.0",   only: :dev},
       {:postgrex,            "~> 0.11.0"},
-      {:phoenix_html,        "~> 2.1"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
       
+      {:comeonin,            "~> 2.1.0"},
       {:cowboy,              "~> 1.0"},
-      {:ex_spec,             "~> 1.0.0",   only: :test},
-      {:hound,               "~> 0.8",     only: :test},
-      {:mix_test_watch,      "~> 0.2",     only: :dev}
+      {:ex_machina,          "~>0.6",    only: [:dev, :test]},
+      {:ex_spec,             "~> 1.0.0", only: :test},
+      {:guardian,            "0.9.0"},
+      {:hound,               "~> 0.8",   only: :test},
+      {:mailman,             "~> 0.2.1"},
+      {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},
+      {:sentinel,            "0.0.4"},
+      {:ueberauth,           git: "https://github.com/ueberauth/ueberauth.git", override: true},
+      {:ueberauth_github,    "~>0.2.0"},
+      {:ueberauth_identity,  "~>0.2.1"},
+      {:ueberauth_slack,     "~>0.2.0"},
+      {:uuid,                "~> 1.1"}
     ]
   end
 
@@ -51,7 +82,20 @@ defmodule Gebetsgruppe.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop",   "ecto.setup"],
+      "test":       [&setup_db/1,   "test"]
+    ]
   end
+
+  defp setup_db(_) do
+    unless List.keyfind(Application.loaded_applications(), project[:app], 0) do
+      # Create the database, run migrations
+      Mix.Task.run "ecto.drop",    ["--quiet"]
+      Mix.Task.run "ecto.create",  ["--quiet"]
+      Mix.Task.run "ecto.migrate", ["--quiet"]
+    end
+  end
+  
 end

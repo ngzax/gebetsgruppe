@@ -22,12 +22,31 @@ defmodule Gebetsgruppe.ConnCase do
 
       alias Gebetsgruppe.Repo
       import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query, only: [from: 2]
 
       import Gebetsgruppe.Router.Helpers
 
       # The default endpoint for testing
       @endpoint Gebetsgruppe.Endpoint
+
+      # We need a way to get into the connection to login a user
+      # We need to use the bypass_through to fire the plugs in the router
+      # and get the session fetched.
+      def guardian_login(%Gebetsgruppe.User{} = user), do: guardian_login(conn(), user, :token, [])
+      def guardian_login(%Gebetsgruppe.User{} = user, token), do: guardian_login(conn(), user, token, [])
+      def guardian_login(%Gebetsgruppe.User{} = user, token, opts), do: guardian_login(conn(), user, token, opts)
+
+      def guardian_login(%Plug.Conn{} = conn, user), do: guardian_login(conn, user, :token, [])
+      def guardian_login(%Plug.Conn{} = conn, user, token), do: guardian_login(conn, user, token, [])
+      def guardian_login(%Plug.Conn{} = conn, user, token, opts) do
+        conn
+          |> bypass_through(Gebetsgruppe.Router, [:browser])
+          |> get("/")
+          |> Guardian.Plug.sign_in(user, token, opts)
+          |> send_resp(200, "Flush the session yo")
+          |> recycle()
+      end
+
     end
   end
 
@@ -36,6 +55,7 @@ defmodule Gebetsgruppe.ConnCase do
       Ecto.Adapters.SQL.restart_test_transaction(Gebetsgruppe.Repo, [])
     end
 
-    {:ok, conn: Phoenix.ConnTest.conn()}
+    :ok
   end
+
 end

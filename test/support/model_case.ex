@@ -19,6 +19,8 @@ defmodule Gebetsgruppe.ModelCase do
       alias Gebetsgruppe.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
+
+      import Gebetsgruppe.Factory
       import Gebetsgruppe.ModelCase
     end
   end

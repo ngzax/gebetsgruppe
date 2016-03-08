@@ -23,7 +23,7 @@ defmodule Gebetsgruppe.Mixfile do
     ]
   end
 
-  def applications(env) when env in [:test] do
+  def applications(:test) do
     applications(:default) ++ [:ex_machina]
   end
   

@@ -63,6 +63,7 @@ defmodule Gebetsgruppe.Mixfile do
       {:ex_machina,          "~>0.6",    only: [:dev, :test]},
       {:ex_spec,             "~> 1.0.0", only: :test},
       {:guardian,            "0.9.0"},
+      {:credo,               ">= 0.0.0", only: [:dev, :test]},
       {:hound,               "~> 0.8",   only: :test},
       {:mailman,             "~> 0.2.1"},
       {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},

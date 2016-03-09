@@ -51,7 +51,7 @@ defmodule Gebetsgruppe.AuthController do
     end
   end
 
-  defp auths(nil), do: []
+  defp auths(nil), do: ["github", "slack"]
   defp auths(%Gebetsgruppe.User{} = user) do
     Ecto.Model.assoc(user, :authorizations)
       |> Repo.all

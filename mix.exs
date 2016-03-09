@@ -35,11 +35,11 @@ defmodule Gebetsgruppe.Mixfile do
       :comeonin,
       :cowboy,
       :logger,
-      :oauth2,
+      # :oauth2,
       :postgrex,
-      :ueberauth_github,
-      :ueberauth_identity,
-      :ueberauth_slack
+      # :ueberauth_github,
+      :ueberauth_identity
+      # :ueberauth_slack
     ]
   end
     
@@ -56,22 +56,22 @@ defmodule Gebetsgruppe.Mixfile do
       {:phoenix_ecto,        "~> 2.0"},
       {:phoenix_html,        "~> 2.3"},
       {:phoenix_live_reload, "~> 1.0",   only: :dev},
-      {:postgrex,            "~> 0.11.0"},
+      {:postgrex,            "~> 0.11"},
       
-      {:comeonin,            "~> 2.1.0"},
+      {:comeonin,            "~> 2.1"},
       {:cowboy,              "~> 1.0"},
-      {:ex_machina,          "~>0.6",    only: [:dev, :test]},
-      {:ex_spec,             "~> 1.0.0", only: :test},
-      {:guardian,            "0.9.0"},
       {:credo,               ">= 0.0.0", only: [:dev, :test]},
+      {:ex_machina,          "~> 0.6",   only: [:dev, :test]},
+      {:ex_spec,             "~> 1.0",   only: :test},
+      {:guardian,            "~> 0.10",               override: true},
       {:hound,               "~> 0.8",   only: :test},
-      {:mailman,             "~> 0.2.1"},
+      {:mailman,             "~> 0.2"},
       {:mix_test_watch,      "~> 0.2",   only: [:dev, :test]},
       {:sentinel,            "0.0.4"},
       {:ueberauth,           git: "https://github.com/ueberauth/ueberauth.git", override: true},
-      {:ueberauth_github,    "~>0.2.0"},
-      {:ueberauth_identity,  "~>0.2.1"},
-      {:ueberauth_slack,     "~>0.2.0"},
+      # {:ueberauth_github,    "~>0.2.0"},
+      {:ueberauth_identity,  "~>0.2"},
+      # {:ueberauth_slack,     "~>0.2.0"},
       {:uuid,                "~> 1.1"}
     ]
   end

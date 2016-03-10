@@ -1,24 +1,35 @@
-<div class="jumbotron">
-  <h2>Willkommen zu die Gebetsguppe!</h2>
-  <p class="lead">A place to join with others in Prayer.</p>
-</div>
+<div class="uk-grid">
+  <div class="uk-grid uk-width-1-1">
+    <div class="uk-panel uk-panel-box uk-panel-box-primary">
+      <div class="uk-panel-header">
+        <div class="uk-panel-title">Willkommen zu die Gebetsguppe!</div>
+      </div>
+      <h5 class="uk-text-center">A place to join with others in Prayer.</h5>
+    </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://lifehopeandtruth.com/god/prayer-fasting-and-meditation/how-to-pray/">How to Pray</a>
-      </li>
-    </ul>
+    <div class="uk-panel uk-panel-box uk-panel-box-primary">
+      <div class="uk-width-1-4"></div>
+
+      <div class="uk-width-1-4">
+        <h4>Resources</h4>
+        <ul>
+          <li>
+            <a href="http://lifehopeandtruth.com/god/prayer-fasting-and-meditation/how-to-pray/">How to Pray</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uk-width-1-4">
+        <h4>Help</h4>
+        <ul>
+          <li>
+            <a href="https://github.com/ngzax/gebetsgruppe/issues">Issue Tracker / Bug Reports</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uk-width-1-4"></div>
+    </div>
   </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="https://github.com/ngzax/gebetsgruppe/issues">Issue Tracker / Bug Reports</a>
-      </li>
-    </ul>
-  </div>
 </div>

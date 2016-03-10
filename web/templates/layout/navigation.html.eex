@@ -1,11 +1,34 @@
-<ul class='nav nav-tabs'>
-  <li role='presentation' class='<%= active_on_current(@conn, private_page_path(@conn, :index)) %>'>
-    <%= link "Private", to: private_page_path(@conn, :index) %>
-  </li>
-  <li role='presentation' class='<%= active_on_current(@conn, authorization_path(@conn, :index)) %>'>
-    <%= link "Authorizations", to: authorization_path(@conn, :index) %>
-  </li>
-  <li role='presentation' class='<%= active_on_current(@conn, token_path(@conn, :index)) %>'>
-    <%= link "Tokens", to: token_path(@conn, :index) %>
-  </li>
-</ul>
+<nav class="uk-navbar uk-margin-large-bottom">
+  <a class="uk-navbar-brand uk-hidden-small" href="/">
+    Die Gebetsgruppe
+  </a>
+
+  <ul class="uk-navbar-nav uk-hidden-small">
+    <%= if @current_user do %>
+      <li role='presentation' class='<%= active_on_current(@conn, private_page_path(@conn, :index)) %>'>
+        <%= link "Private", to: private_page_path(@conn, :index) %>
+      </li>
+      <li role='presentation' class='<%= active_on_current(@conn, authorization_path(@conn, :index)) %>'>
+        <%= link "Authorizations", to: authorization_path(@conn, :index) %>
+      </li>
+      <li role='presentation' class='<%= active_on_current(@conn, token_path(@conn, :index)) %>'>
+        <%= link "Tokens", to: token_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Logout", to: auth_path(@conn, :logout), method: :delete, class: "btn btn-danger" %>
+      </li>
+      <%= if @conn.request_path != auth_path(@conn, :login, "identity") do %>
+        <li>
+          <%= link "Connect", to: auth_path(@conn, :login, "identity"), class: "btn btn-default"%>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="uk-active">
+        <%= if @conn.request_path != auth_path(@conn, :login, "identity") do %>
+          <%= link "Login", to: auth_path(@conn, :login, "identity"), class: "btn btn-primary"%>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+</nav>

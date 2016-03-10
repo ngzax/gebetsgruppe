@@ -16,26 +16,15 @@
   </head>
 
   <body>
-    <div class="fluid-container" role="main">
-      <div class="container" role="main">
-        <%= render "impersonation.html", conn: @conn %>
-        <div>
-          <ul class="nav nav-pills pull-right btn-group-xs">
-            <%= render "login_bar.html", current_user: @current_user, conn: @conn %>
-          </ul>
-        </div>
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom" role="main">
+      <%= render "impersonation.html", conn: @conn %>
+      <%= render "navigation.html", current_user: @current_user, conn: @conn %>
 
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-        <%= if @current_user do %>
-          <%= render "navigation.html", current_user: @current_user, conn: @conn %>
-        <% end %>
-
-        <%= render @view_module, @view_template, assigns %>
-
-      </div> <!-- /container -->
-    </div> <!-- /fluid-container -->
+      <%= render @view_module, @view_template, assigns %>
+    </div>
 
     <!-- div class='row'>
       <div class="well text-center col-sm-6 col-xs-12 col-sm-offset-3">

@@ -10,20 +10,34 @@
 </div>
 
 <div class="uk-grid">
-  <div class="uk-width-medium-1-2 uk-row-first"></div>
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="http://lifehopeandtruth.com/god/prayer-fasting-and-meditation/how-to-pray/">How to Pray</a>
-      </li>
-    </ul>
+  <div class="uk-width-medium-2-6 uk-push-1-6 uk-row-first">
+    <div class= "uk-grid">
+      <div class="uk-width-1-6">
+        <i class="uk-icon-book uk-icon-large"></i>
+      </div>
+      <div class="uk-width-5-6">
+        <h2>Resources</h2>
+        <ul>
+          <li>
+            <a href="http://lifehopeandtruth.com/god/prayer-fasting-and-meditation/how-to-pray/">How to Pray</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="uk-width-medium-1-2"></div>
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="https://github.com/ngzax/gebetsgruppe/issues">Issue Tracker / Bug Reports</a>
-      </li>
-    </ul>
+  <div class="uk-width-medium-2-6 uk-push-1-6">
+    <div class= "uk-grid">
+      <div class="uk-width-1-6">
+        <i class="uk-icon-question-circle uk-icon-large"></i>
+      </div>
+      <div class="uk-width-5-6">
+        <h2>Help</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/ngzax/gebetsgruppe/issues">Issue Tracker / Bug Reports</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,8 +1,6 @@
 <nav class="uk-navbar">
-  <a class="uk-navbar-brand uk-hidden-small" href="/">
-    Die Gebetsgruppe
-  </a>
-
+  <a class="uk-navbar-brand uk-hidden-small" href="/"><i class="uk-icon-home uk-icon-small"></i></a>
+  
   <%= if @current_user do %>
     <ul class="uk-navbar-nav uk-hidden-small">
       <li role='presentation' class='<%= active_on_current(@conn, private_page_path(@conn, :index)) %>'>
@@ -24,7 +22,7 @@
       </li>
     </ul>
   <% else %>
-    <ul class="uk-navbar-nav uk-hidden-small  uk-navbar-flip">
+    <ul class="uk-navbar-nav uk-hidden-small uk-navbar-flip">
       <li class="uk-active">
         <%= if @conn.request_path != auth_path(@conn, :login, "identity") do %>
           <%= link "Login", to: auth_path(@conn, :login, "identity") %>
@@ -32,5 +30,5 @@
       </li>
     </ul>
   <% end %>
-
+  
 </nav>

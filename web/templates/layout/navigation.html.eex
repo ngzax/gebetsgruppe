@@ -1,22 +1,25 @@
 <nav class="uk-navbar">
-  <a class="uk-navbar-brand uk-hidden-small" href="/"><i class="uk-icon-home uk-icon-small"></i></a>
+  <a class="uk-navbar-brand" href="/"><i class="uk-icon-home uk-icon-small"></i></a>
   
   <%= if @current_user do %>
-    <ul class="uk-navbar-nav uk-hidden-small">
-      <li role='presentation' class='<%= active_on_current(@conn, private_page_path(@conn, :index)) %>'>
-        <%= link "Prayers", to: private_page_path(@conn, :index) %>
+    <ul class="uk-navbar-nav">
+      <li class="<%= active_on_current(@conn, gebet_path(@conn, :index)) %>">
+        <%= link "Prayers", to: gebet_path(@conn, :index) %>
       </li>
 
-      <li role='presentation' class='<%= active_on_current(@conn, private_page_path(@conn, :index)) %>'>
-        <%= link "Private", to: private_page_path(@conn, :index) %>
-      </li>
-
-      <li role='presentation' class='<%= active_on_current(@conn, authorization_path(@conn, :index)) %>'>
-        <%= link "Authorizations", to: authorization_path(@conn, :index) %>
-      </li>
-
-      <li role='presentation' class='<%= active_on_current(@conn, token_path(@conn, :index)) %>'>
-        <%= link "Tokens", to: token_path(@conn, :index) %>
+      <li class="uk-parent" data-uk-dropdown aria-haspopup="true" aria-expanded="false">
+        <a href="">My Stuff <i class="uk-icon-caret-down"></i></a>
+        <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
+          <ul class="uk-nav uk-nav-navbar">
+            <li><%= link "Private", to: private_page_path(@conn, :index) %></li>
+            <li>
+              <%= link "Authorizations", to: authorization_path(@conn, :index) %>
+            </li>
+            <li>
+              <%= link "Tokens", to: token_path(@conn, :index) %>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <%= if @conn.request_path != auth_path(@conn, :login, "identity") do %>
@@ -25,7 +28,7 @@
         </li>
       <% end %>
 
-      <li role="presentation" class="<%= active_on_current(@conn, authorization_path(@conn, :index)) %>">
+      <li class="<%= active_on_current(@conn, authorization_path(@conn, :index)) %>">
         <%= link "Logout", to: auth_path(@conn, :logout), method: :delete %>
       </li>
     </ul>

@@ -1,5 +1,5 @@
 /* This javascript was taken from the PhoenixGuardian Project */
-
+/*
 import {Socket} from "deps/phoenix/web/static/js/phoenix";
 
 const authSocket = new Socket("/socket");
@@ -37,3 +37,4 @@ const sendMessage = (e) => {
 }
 
 export default sendMessage;
+*/
